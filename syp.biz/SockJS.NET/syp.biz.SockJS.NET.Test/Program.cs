@@ -14,29 +14,32 @@ namespace syp.biz.SockJS.NET.Test
             {
                 Client.SockJS.SetLogger(new ConsoleLogger());
                 var sockJs = new Client.SockJS("http://localhost:9999/echo");
-                sockJs.AddEventListener("open", (openSender, openArgs) =>
+                sockJs.AddEventListener("open", (sender, e) =>
                 {
                     Console.WriteLine("****************** Main: Open");
-                    sockJs.AddEventListener("message", (messageSender, messageArgs) =>
+                    sockJs.Send("test");
+                });
+                sockJs.AddEventListener("message", (sender, e) =>
+                {
+                    Console.WriteLine($"****************** Main: Message: {string.Join(",", e.Select(o => o?.ToString()))}");
+                    if (e[0] is TransportMessageEvent msg)
                     {
-                        Console.WriteLine($"****************** Main: Message: {string.Join(",", messageArgs.Select(o => o?.ToString()))}");
-                        if (messageArgs[0] is TransportMessageEvent e)
+                        var dataString = msg.Data.ToString();
+                        if (dataString == "test")
                         {
-                            var dataString = e.Data.ToString();
-                            if (dataString == "test")
-                            {
-                                Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
+                            Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
 //                                sockJs.Send("shutdown");
 //                            }
 //                            else if (dataString == "ok")
 //                            {
 //                                Console.WriteLine($"****************** Main: Got back shutdown confirmation");
-                                sockJs.Close();
-                            }
+                            sockJs.Close();
                         }
-
-                    });
-                    sockJs.Send("test");
+                    }
+                });
+                sockJs.AddEventListener("close", (sender, e) =>
+                {
+                    Console.WriteLine($"****************** Main: Closed");
                 });
             }
             catch (Exception ex)
