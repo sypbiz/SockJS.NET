@@ -22,6 +22,27 @@ namespace syp.biz.SockJS.NET.Client.Transports.Lib.Driver
             this.Connect().Wait();
         }
 
+        public static bool IsSupported { get; } = CheckIfWebSocketIsSupported();
+
+        private static bool CheckIfWebSocketIsSupported()
+        {
+            Log.Debug(nameof(CheckIfWebSocketIsSupported));
+            try
+            {
+                using (var socket = new ClientWebSocket()) return true;
+            }
+            catch (PlatformNotSupportedException ex)
+            {
+                Log.Debug($"{nameof(CheckIfWebSocketIsSupported)}: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{nameof(CheckIfWebSocketIsSupported)}: {ex}");
+                throw;
+            }
+        }
+
         private async Task Connect()
         {
             try

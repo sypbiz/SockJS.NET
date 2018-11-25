@@ -1,8 +1,6 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
 using syp.biz.SockJS.NET.Client.Event;
 using syp.biz.SockJS.NET.Client.Transports.Lib.Driver;
-using syp.biz.SockJS.NET.Common;
 using syp.biz.SockJS.NET.Common.DTO;
 using syp.biz.SockJS.NET.Common.Extensions;
 using syp.biz.SockJS.NET.Common.Interfaces;
@@ -72,17 +70,7 @@ self.ws.close();
             this.Cleanup();
         }
 
-        private static bool IsEnabled
-        {
-            get
-            {
-                Log.Debug(nameof(IsEnabled));
-                return true;
-                /* NOT RUNNING IN BROWSER
- return !!WebsocketDriver;
-                 */
-            }
-        }
+        private static bool IsEnabled => WebSocketDriver.IsSupported;
 
         public string TransportName => "websocket";
         public ITransport FacadeTransport => null;
