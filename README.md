@@ -48,6 +48,10 @@ sockJs.AddEventListener("close", (sender, e) =>
 });
 ```
 
+Note
+----
+WebSocket connection is implemented via [System.Net.WebSockets.ClientWebSocket](https://docs.microsoft.com/en-us/dotnet/api/system.net.websockets.clientwebsocket?view=netstandard-2.0) and as such, is not supported on  Windows 7, Windows Vista SP2, and Windows Server 2008. See [Remarks section](https://docs.microsoft.com/en-us/dotnet/api/system.net.websockets.clientwebsocket?view=netstandard-2.0#remarks).
+
 References
 ----------
 This library is a .NET port of the [SockJS Client](https://github.com/sockjs/sockjs-client) JavaScript library and is subject to the same license published [here](https://raw.githubusercontent.com/sockjs/sockjs-client/cc6ae9531bda2d4ee80e52fab246933558790163/LICENSE), via commit **cc6ae9531bda2d4ee80e52fab246933558790163**

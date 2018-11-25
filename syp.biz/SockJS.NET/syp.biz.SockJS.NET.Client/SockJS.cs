@@ -271,7 +271,7 @@ namespace syp.biz.SockJS.NET.Client
         private void OnTransportMessage(object sender, object[] args)
         {
             var msg = (string)args[0];
-            Log.Debug($"{nameof(this.OnTransportMessage)}, {msg}");
+            Log.Debug($"{nameof(this.OnTransportMessage)}: {msg}");
             var type = msg.Substring(0, 1);
             var content = msg.Substring(1);
 
