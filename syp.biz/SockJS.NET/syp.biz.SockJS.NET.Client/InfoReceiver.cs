@@ -47,7 +47,7 @@ namespace syp.biz.SockJS.NET.Client
         {
             await Task.Delay(0);
             var baseUri = new Uri(baseUrl);
-            var url = new Uri(baseUri, $"{baseUri.AbsolutePath}/info").OriginalString;
+            var url = new Uri(baseUri, $"{baseUri.AbsolutePath}/info?t={DateTimeOffset.Now.ToUnixTimeMilliseconds()}").OriginalString;
             Log.Debug($"{nameof(this.DoInfoRequest)}: {url}");
 
             try
