@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace syp.biz.SockJS.NET.Common.Utils
 {
@@ -16,28 +17,27 @@ namespace syp.biz.SockJS.NET.Common.Utils
         /// </summary>
         public static string Quote(string unescaped)
         {
-            var quoted = $"\"{unescaped}\"";
+            var quoted = JsonConvert.SerializeObject(unescaped);
             if (!ExtraEscapable.IsMatch(quoted)) return quoted;
             
             throw new NotImplementedException("unrollLookup");
             
             /*
-     var quoted = JSON3.stringify(string);
+             var quoted = JSON3.stringify(string);
 
-    // In most cases this should be very fast and good enough.
-    extraEscapable.lastIndex = 0;
-    if (!extraEscapable.test(quoted)) {
-      return quoted;
-    }
+            // In most cases this should be very fast and good enough.
+            extraEscapable.lastIndex = 0;
+            if (!extraEscapable.test(quoted)) {
+              return quoted;
+            }
 
-    if (!extraLookup) {
-      extraLookup = unrollLookup(extraEscapable);
-    }
+            if (!extraLookup) {
+              extraLookup = unrollLookup(extraEscapable);
+            }
 
-    return quoted.replace(extraEscapable, function(a) {
-      return extraLookup[a];
-    });
-
+            return quoted.replace(extraEscapable, function(a) {
+              return extraLookup[a];
+            });
              */
         }
     }

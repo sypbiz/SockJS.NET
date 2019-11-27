@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using Newtonsoft.Json;
 using syp.biz.SockJS.NET.Client.Event;
 using syp.biz.SockJS.NET.Common.Interfaces;
 
@@ -17,6 +18,7 @@ namespace syp.biz.SockJS.NET.Test
                 sockJs.AddEventListener("open", (sender, e) =>
                 {
                     Console.WriteLine("****************** Main: Open");
+                    sockJs.Send(JsonConvert.SerializeObject(new { foo = "bar" }));
                     sockJs.Send("test");
                 });
                 sockJs.AddEventListener("message", (sender, e) =>
