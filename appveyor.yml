@@ -12,12 +12,12 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Display minimal restore text
-  - cmd: dotnet restore ./SockJS.NET/syp.biz/SockJS.NET/syp.biz.SockJS.NET.Client/syp.biz.SockJS.NET.Client.csproj --verbosity m
-  - cmd: dotnet restore ./SockJS.NET/syp.biz/SockJS.NET/syp.biz.SockJS.NET.Common/syp.biz.SockJS.NET.Common.csproj --verbosity m
+  - cmd: dotnet restore ./syp.biz/SockJS.NET/syp.biz.SockJS.NET.Client/syp.biz.SockJS.NET.Client.csproj --verbosity m
+  - cmd: dotnet restore ./syp.biz/SockJS.NET/syp.biz.SockJS.NET.Common/syp.biz.SockJS.NET.Common.csproj --verbosity m
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet publish ./SockJS.NET/syp.biz/SockJS.NET/syp.biz.SockJS.NET.Client/syp.biz.SockJS.NET.Client.csproj
-  - cmd: dotnet publish ./SockJS.NET/syp.biz/SockJS.NET/syp.biz.SockJS.NET.Common/syp.biz.SockJS.NET.Common.csproj
+  - cmd: dotnet publish ./syp.biz/SockJS.NET/syp.biz.SockJS.NET.Client/syp.biz.SockJS.NET.Client.csproj
+  - cmd: dotnet publish ./syp.biz/SockJS.NET/syp.biz.SockJS.NET.Common/syp.biz.SockJS.NET.Common.csproj
 after_build:
   # For once the build has completed
 #artifacts:
