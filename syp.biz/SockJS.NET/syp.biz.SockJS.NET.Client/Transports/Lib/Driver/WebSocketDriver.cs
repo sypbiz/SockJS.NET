@@ -69,6 +69,11 @@ namespace syp.biz.SockJS.NET.Client.Transports.Lib.Driver
                     var buffer = new byte[1024];
                     var segment = new ArraySegment<byte>(buffer);
                     var result = await this._socket.ReceiveAsync(segment, this._cancel.Token);
+                    if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        this.Emit("close", 1000, "Server sent close message");
+                        break;
+                    }
                     var data = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     builder.Append(data);
                     if (!result.EndOfMessage) continue;
