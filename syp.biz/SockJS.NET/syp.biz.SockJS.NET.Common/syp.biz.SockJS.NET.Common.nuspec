@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>syp.biz.SockJS.NET.Common</id>
+    <title>SockJS.NET.Common - Includes all interfaces, extensions, enums and utils which are common to the client, user of the client and for extending the client</title>
+    <authors>sypbiz</authors>
+    <licenseUrl>https://github.com/DenisBalan/SockJS.NET</licenseUrl>
+    <projectUrl>https://github.com/DenisBalan/SockJS.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET implementation of the SockJS client</description>
+    <releaseNotes>Fork from https://github.com/sypbiz/SockJS.NET</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>sockjs ws</tags>
+  </metadata>
+</package>
