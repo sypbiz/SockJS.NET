@@ -15,7 +15,7 @@ using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client
 {
-    public class SockJS : EventTarget
+    public class SockJS : EventTarget, IClient, IClientEventEmitter
     {
         private CancellationTokenSource _transportTimeoutCancellationToken;
         private ReadyState _readyState;
@@ -38,7 +38,6 @@ namespace syp.biz.SockJS.NET.Client
             ConvertOrigin();
             RemoveTrailingSlash(ref url);
             this.Url = url;
-            this.StartConnectionInBackground();
         }
 
         public static string Version { get; } = typeof(SockJS).Assembly.GetName().Version.ToString(3);
@@ -170,6 +169,8 @@ namespace syp.biz.SockJS.NET.Client
         private static string DefaultSessionIdGenerator() => Common.Utils.Random.GetString(8);
 
         private static bool UserSetCode(int code) => code == 1000 || (code >= 3000 && code <= 4999);
+
+        public void Start() => this.StartConnectionInBackground();
 
         public void Close(int code = 1000, string reason = "Normal closure")
         {
@@ -431,5 +432,17 @@ namespace syp.biz.SockJS.NET.Client
                 ? 4 * rtt // rto > 400msec
                 : 300 + rtt; // 300msec < rto <= 400msec
         }
+
+        public void AddOpenEventListener(EventHandler<object[]> handler) => this.AddEventListener("open", handler);
+        public void RemoveOpenEventListener(EventHandler<object[]> handler) => this.RemoveEventListener("open", handler);
+
+        public void AddMessageEventListener(EventHandler<object[]> handler) => this.AddEventListener("message", handler);
+        public void RemoveMessageEventListener(EventHandler<object[]> handler) => this.RemoveEventListener("message", handler);
+
+        public void AddCloseEventListener(EventHandler<object[]> handler) => this.AddEventListener("close", handler);
+        public void RemoveCloseEventListener(EventHandler<object[]> handler) => this.RemoveEventListener("close", handler);
+        
+        public void AddStateChangeEventListener(EventHandler<object[]> handler) => this.AddEventListener("stateChanged", handler);
+        public void RemoveStateChangeEventListener(EventHandler<object[]> handler) => this.RemoveEventListener("stateChanged", handler);
     }
 }

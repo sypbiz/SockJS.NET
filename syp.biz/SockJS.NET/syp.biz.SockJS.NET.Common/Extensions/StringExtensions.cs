@@ -1,4 +1,6 @@
-﻿namespace syp.biz.SockJS.NET.Common.Extensions
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace syp.biz.SockJS.NET.Common.Extensions
 {
     public static class StringExtensions
     {
@@ -11,7 +13,7 @@
         /// or if <paramref name="value"/> consists exclusively of white-space characters.
         /// </returns>
         /// <seealso cref="string.IsNullOrWhiteSpace"/>
-        public static bool IsNullOrWhiteSpace(this string value) => string.IsNullOrWhiteSpace(value);
+        public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string value) => string.IsNullOrWhiteSpace(value);
 
         /// <summary>
         /// Indicates whether the specified string is null or an <see cref="F:System.String.Empty"></see> string.
@@ -21,6 +23,6 @@
         /// <c>true</c> if the <paramref name="value">value</paramref> parameter is null or an empty string (""); otherwise, <c>false</c>.
         /// </returns>
         /// <seealso cref="string.IsNullOrEmpty"/>
-        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this string value) => string.IsNullOrEmpty(value);
     }
 }

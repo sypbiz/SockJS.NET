@@ -1,48 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using Newtonsoft.Json;
-using syp.biz.SockJS.NET.Client.Event;
+using System.Threading.Tasks;
 using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
-                Client.SockJS.SetLogger(new ConsoleLogger());
-                var sockJs = new Client.SockJS("http://localhost:9999/echo");
-                sockJs.AddEventListener("open", (sender, e) =>
-                {
-                    Console.WriteLine("****************** Main: Open");
-                    sockJs.Send(JsonConvert.SerializeObject(new { foo = "bar" }));
-                    sockJs.Send("test");
-                });
-                sockJs.AddEventListener("message", (sender, e) =>
-                {
-                    Console.WriteLine($"****************** Main: Message: {string.Join(",", e.Select(o => o?.ToString()))}");
-                    if (e[0] is TransportMessageEvent msg)
-                    {
-                        var dataString = msg.Data.ToString();
-                        if (dataString == "test")
-                        {
-                            Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
-//                                sockJs.Send("shutdown");
-//                            }
-//                            else if (dataString == "ok")
-//                            {
-//                                Console.WriteLine($"****************** Main: Got back shutdown confirmation");
-                            sockJs.Close();
-                        }
-                    }
-                });
-                sockJs.AddEventListener("close", (sender, e) =>
-                {
-                    Console.WriteLine($"****************** Main: Closed");
-                });
+                // await new OriginalClientTester().Execute();
+                await new NewClientTester().Execute();
             }
             catch (Exception ex)
             {

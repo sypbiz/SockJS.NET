@@ -7,14 +7,7 @@
     <FileVersion>2.0.0.0</FileVersion>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors>
+    <!-- <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors> -->
   </PropertyGroup>
 
   <ItemGroup>

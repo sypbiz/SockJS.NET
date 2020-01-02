@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -6,13 +6,7 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Nullable>enable</Nullable>
     <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors>
   </PropertyGroup>
 
@@ -23,5 +17,4 @@
   <ItemGroup>
     <ProjectReference Include="..\syp.biz.SockJS.NET.Common\syp.biz.SockJS.NET.Common.csproj" />
   </ItemGroup>
-
 </Project>
