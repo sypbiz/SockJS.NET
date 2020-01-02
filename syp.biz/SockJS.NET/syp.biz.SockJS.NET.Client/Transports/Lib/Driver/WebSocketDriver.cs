@@ -69,6 +69,11 @@ namespace syp.biz.SockJS.NET.Client.Transports.Lib.Driver
                     var buffer = new byte[1024];
                     var segment = new ArraySegment<byte>(buffer);
                     var result = await this._socket.ReceiveAsync(segment, this._cancel.Token);
+                    if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        await this.Close(WebSocketCloseStatus.NormalClosure, "Server sent close message");
+                        break;
+                    }
                     var data = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     builder.Append(data);
                     if (!result.EndOfMessage) continue;
@@ -111,15 +116,15 @@ namespace syp.biz.SockJS.NET.Client.Transports.Lib.Driver
             {
                 switch (this._socket.State)
                 {
-                    case WebSocketState.Aborted:
-                    case WebSocketState.Closed:
-                    case WebSocketState.CloseReceived:
-                    case WebSocketState.CloseSent:
-                    case WebSocketState.None:
-                        return;
+
+                    case WebSocketState.Connecting:
+                    case WebSocketState.Open:
+                        await this._socket.CloseAsync(status, reason, this._cancel.Token);
+                        this._cancel.Cancel();
+                    break;
+
                 }
-                await this._socket.CloseAsync(status, reason, this._cancel.Token);
-                this._cancel.Cancel();
+                this.Emit("close", status, reason);
             }
             catch (Exception ex)
             {
