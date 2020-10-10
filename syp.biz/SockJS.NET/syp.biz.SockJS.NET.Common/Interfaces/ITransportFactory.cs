@@ -15,7 +15,7 @@ namespace syp.biz.SockJS.NET.Common.Interfaces
 
     public interface ITransportFactory2
     {
-        ITransportFactory FacadeTransport { get; }
+        ITransportFactory2? FacadeTransport { get; }
         long RoundTrips { get; }
         string TransportName { get; }
         bool Enabled(InfoDto info);

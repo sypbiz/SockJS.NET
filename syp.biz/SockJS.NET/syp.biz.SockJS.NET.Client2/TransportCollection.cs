@@ -28,26 +28,26 @@ namespace syp.biz.SockJS.NET.Client2
             var transports = new TransportCollection();
             if (transportsWhitelist is null) transportsWhitelist = Array.Empty<string>();
 
-            // TODO: finish
-//            foreach (var factory in Transports.TransportFactoryFactory.GetTransportFactories())
-//            {
-//                if (factory is null) continue;
-//                if (transportsWhitelist.Length > 0 && !transportsWhitelist.Contains(factory.TransportName))
-//                {
-//                    Log.Debug($"{nameof(FilterToEnabled)}: Not in whitelist {factory.TransportName}");
-//                    continue;
-//                }
-//
-//                if (!factory.Enabled(info))
-//                {
-//                    Log.Debug($"{nameof(FilterToEnabled)}: Disabled {factory.TransportName}");
-//                    continue;
-//                }
-//
-//                Log.Debug($"{nameof(FilterToEnabled)}: Enabled {factory.TransportName}");
-//                transports._main.Add(factory);
-//                if (factory.FacadeTransport != null) transports._facade.Add(factory.FacadeTransport);
-//            }
+            foreach (var factory in Transports.TransportFactoryFactory.GetTransportFactories())
+            {
+                // TODO: finish
+                if (factory is null) continue;
+                if (transportsWhitelist.Length > 0 && !transportsWhitelist.Contains(factory.TransportName))
+                {
+                    Log.Debug($"{nameof(FilterToEnabled)}: Not in whitelist {factory.TransportName}");
+                    continue;
+                }
+
+                if (!factory.Enabled(info))
+                {
+                    Log.Debug($"{nameof(FilterToEnabled)}: Disabled {factory.TransportName}");
+                    continue;
+                }
+
+                Log.Debug($"{nameof(FilterToEnabled)}: Enabled {factory.TransportName}");
+                transports._main.Add(factory);
+                if (factory.FacadeTransport != null) transports._facade.Add(factory.FacadeTransport);
+            }
 
             return transports;
         }
