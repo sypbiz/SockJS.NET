@@ -3,17 +3,37 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>1.4.0</Version>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <AssemblyVersion>1.4.1.0</AssemblyVersion>
     <LangVersion>7.1</LangVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <FileVersion>1.4.1.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright (c) 2018 syp.biz</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/sypbiz/SockJS.NET</PackageProjectUrl>
+    <Description>A .NET implementation of the SockJS client</Description>
+    <RepositoryUrl>https://github.com/sypbiz/SockJS.NET</RepositoryUrl>
+    <Authors>syp.biz</Authors>
+    <Company>syp.biz</Company>
+    <Product>SockJS.NET.Client</Product>
+    <PackageTags>SockJS; Client; .NET</PackageTags>
+    <AssemblyOriginatorKeyFile>..\..\..\syp.biz.SockJS.NET.pfx</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\syp.biz.SockJS.NET.Common\syp.biz.SockJS.NET.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
