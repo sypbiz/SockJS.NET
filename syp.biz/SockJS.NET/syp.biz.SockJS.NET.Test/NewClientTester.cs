@@ -12,39 +12,36 @@ namespace syp.biz.SockJS.NET.Test
         public async Task Execute()
         {
             var tcs = new TaskCompletionSource<bool>();
-            SockJS2.SetLogger(new ConsoleLogger());
-            var sockJs = new SockJS2("http://localhost:9999/echo");
-            sockJs.OpenEvent += (sender, e) =>
+            var config = syp.biz.SockJS.NET.Client2.SockJsConfiguration.Factory.BuildDefault();
+            config.Logger = new ConsoleLogger();
+            config.BaseEndpoint = new Uri("http://localhost:9999/echo");
+            var sockJs = new syp.biz.SockJS.NET.Client2.SockJS(config);
+
+            sockJs.Connected += (sender, e) =>
             {
                 Console.WriteLine("****************** Main: Open");
                 sockJs.Send(JsonConvert.SerializeObject(new { foo = "bar" }));
                 sockJs.Send("test");
             };
-            sockJs.MessageEvent += (sender, e) =>
+            sockJs.Message += (sender, msg) =>
             {
-                Console.WriteLine($"****************** Main: Message: {string.Join(",", e.Select(o => o?.ToString()))}");
-                if (e[0] is TransportMessageEvent msg)
-                {
-                    var dataString = msg.Data.ToString();
-                    if (dataString == "test")
-                    {
-                        Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
-                        //                                sockJs.Send("shutdown");
-                        //                            }
-                        //                            else if (dataString == "ok")
-                        //                            {
-                        //                                Console.WriteLine($"****************** Main: Got back shutdown confirmation");
-                        sockJs.Close();
-                    }
-                }
+                Console.WriteLine($"****************** Main: Message: {msg}");
+                if (msg != "test") return;
+                Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
+                //                                sockJs.Send("shutdown");
+                //                            }
+                //                            else if (dataString == "ok")
+                //                            {
+                //                                Console.WriteLine($"****************** Main: Got back shutdown confirmation");
+                sockJs.Disconnect().ConfigureAwait(false);
             };
-            sockJs.CloseEvent += (sender, e) =>
+            sockJs.Disconnected += (sender, e) =>
             {
                 Console.WriteLine($"****************** Main: Closed");
-                tcs.TrySetResult(e.wasClean);
+                tcs.TrySetResult(true);
             };
 
-            await sockJs.StartAsync();
+            await sockJs.Connect();
 
             await tcs.Task;
         }

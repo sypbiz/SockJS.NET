@@ -1,20 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors>
+    <PackageId>syp.biz.SockJS.NET.Client2</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>2.0.0</Version>
+    <Authors>syp.biz</Authors>
+    <Company>syp.biz</Company>
+    <Product>SockJS.NET.Client</Product>
+    <Description>A .NET implementation of the SockJS client</Description>
+    <Copyright>Copyright (c) 2020 syp.biz</Copyright>
+    <PackageProjectUrl>https://github.com/sypbiz/SockJS.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sypbiz/SockJS.NET</RepositoryUrl>
+    <PackageTags>SockJS; Client; .NET</PackageTags>
+    <AssemblyOriginatorKeyFile>..\..\..\syp.biz.SockJS.NET.pfx</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\syp.biz.SockJS.NET.Common\syp.biz.SockJS.NET.Common.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+  <None Include="..\..\..\LICENSE">
+    <Pack>True</Pack>
+    <PackagePath></PackagePath>
+  </None>
+  </ItemGroup>
+
 </Project>

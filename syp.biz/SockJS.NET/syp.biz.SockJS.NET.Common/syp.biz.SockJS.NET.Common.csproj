@@ -5,13 +5,32 @@
     <Version>2.0.0</Version>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>syp.biz</Authors>
+    <Company>syp.biz</Company>
+    <Product>SockJS.NET.Common</Product>
+    <Description>A .NET implementation of the SockJS client</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/sypbiz/SockJS.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sypbiz/SockJS.NET</RepositoryUrl>
+    <Copyright>Copyright (c) 2018 syp.biz</Copyright>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\syp.biz.SockJS.NET.pfx</AssemblyOriginatorKeyFile>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <!-- <WarningsAsErrors>NU1605;CS8625</WarningsAsErrors> -->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

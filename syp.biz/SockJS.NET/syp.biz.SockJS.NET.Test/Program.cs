@@ -25,7 +25,7 @@ namespace syp.biz.SockJS.NET.Test
         }
     }
 
-    internal class ConsoleLogger : ILogger
+    internal class ConsoleLogger : ILogger, syp.biz.SockJS.NET.Client2.Interfaces.ILogger
     {
         [DebuggerStepThrough, DebuggerNonUserCode]
         public void Debug(string message) => Console.WriteLine($"{DateTime.Now:s} [DBG] {message}");

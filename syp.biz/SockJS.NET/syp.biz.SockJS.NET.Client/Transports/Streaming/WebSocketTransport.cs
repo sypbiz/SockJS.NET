@@ -60,6 +60,7 @@ self.ws.close();
             var code = (int)e[0];
             var reason = e[1] as string;
             Log.Debug($"{nameof(this.WebSocketOnClose)}: {code} {reason}");
+            this.Emit("close", e);
             this.Cleanup();
         }
 

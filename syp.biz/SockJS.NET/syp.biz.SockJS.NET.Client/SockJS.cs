@@ -251,7 +251,7 @@ namespace syp.biz.SockJS.NET.Client
                 //                var transportObj = new Transport(transport.TransportName, transportUrl, this.TransportUrl, options);
                 var transportObj = transport.Build(transport.TransportName, transportUrl, this.TransportUrl, options);
                 transportObj.On("message", this.OnTransportMessage);
-                transportObj.Once("closed", this.TransportClose);
+                transportObj.Once("close", this.TransportClose);
                 // transportObj.transportName = Transport.transportName; // moved to constructor
                 this.Transport = transportObj;
                 return;

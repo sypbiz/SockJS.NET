@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
+using Newtonsoft.Json;
 
 namespace syp.biz.SockJS.NET.Common.DTO
 {
@@ -17,6 +18,9 @@ namespace syp.biz.SockJS.NET.Common.DTO
 
         [JsonProperty(PropertyName = "websocket")]
         public bool WebSocket { get; set; }
+
+        [JsonIgnore]
+        public long RoundTripTime { get; set; }
         /*
 {
     "entropy":296547767,
