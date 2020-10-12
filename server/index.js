@@ -6,6 +6,7 @@ let shutdown = false;
 const echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js' });
 echo.on('connection', conn => {
     console.log("connection", conn.protocol, conn.url, conn.id);
+    if (conn.headers) console.log(Object.entries(conn.headers).map(([h,v]) => `\t${h}:${v}`).join("\n"));
     conn.on('data', message => {
         console.log("data", ">>>", message);
         if (message === "shutdown") {
