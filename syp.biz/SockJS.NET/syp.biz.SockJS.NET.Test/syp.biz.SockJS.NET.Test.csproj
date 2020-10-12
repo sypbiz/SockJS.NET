@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\syp.biz.SockJS.NET.Client2\syp.biz.SockJS.NET.Client2.csproj" />
-    <ProjectReference Include="..\syp.biz.SockJS.NET.Client\syp.biz.SockJS.NET.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
