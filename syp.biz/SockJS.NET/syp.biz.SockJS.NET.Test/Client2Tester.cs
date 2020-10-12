@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using syp.biz.SockJS.NET.Client2;
 
 namespace syp.biz.SockJS.NET.Test
 {
-    internal class NewClientTester
+    internal class Client2Tester : ITestModule
     {
         public async Task Execute()
         {
@@ -15,6 +16,11 @@ namespace syp.biz.SockJS.NET.Test
                 var config = SockJsConfiguration.Factory.BuildDefault();
                 config.Logger = new ConsoleLogger();
                 config.BaseEndpoint = new Uri("http://localhost:9999/echo");
+                config.DefaultHeaders = new WebHeaderCollection
+                {
+                    {HttpRequestHeader.UserAgent, "Test"},
+                    {"application-key", "foo-bar"}
+                };
                 var sockJs = new Client2.SockJS(config);
 
                 sockJs.Connected += async (sender, e) =>

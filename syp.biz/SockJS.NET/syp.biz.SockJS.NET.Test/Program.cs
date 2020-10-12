@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using syp.biz.SockJS.NET.Common.Interfaces;
 
@@ -11,8 +13,17 @@ namespace syp.biz.SockJS.NET.Test
         {
             try
             {
-                // await new OriginalClientTester().Execute();
-                await new NewClientTester().Execute();
+                var testModules = typeof(Program).Assembly.GetTypes()
+                    .Where(t => !t.IsAbstract && typeof(ITestModule).IsAssignableFrom(t))
+                    .OrderBy(t => t.Name)
+                    .ToImmutableArray();
+
+                foreach (var type in testModules)
+                {
+                    Console.WriteLine($"Testing '{type.Name}'...");
+                    var module = (ITestModule) Activator.CreateInstance(type);
+                    await module!.Execute();
+                }
             }
             catch (Exception ex)
             {
@@ -23,6 +34,11 @@ namespace syp.biz.SockJS.NET.Test
                 Console.ReadLine();
             }
         }
+    }
+
+    internal interface ITestModule
+    {
+        Task Execute();
     }
 
     internal class ConsoleLogger : ILogger, syp.biz.SockJS.NET.Client2.Interfaces.ILogger

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using syp.biz.SockJS.NET.Client2.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
+using syp.biz.SockJS.NET.Common.Extensions;
 
 namespace syp.biz.SockJS.NET.Client2.Implementations
 {
@@ -33,8 +35,14 @@ namespace syp.biz.SockJS.NET.Client2.Implementations
             using var client = new HttpClient();
             using var cts = new CancellationTokenSource(this._config.InfoReceiverTimeout);
 
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            this._config.DefaultHeaders?
+                .OfType<string>()
+                .Select(header => (header, value: this._config.DefaultHeaders[header]))
+                .ForEach(i => request.Headers.Add(i.header, i.value));
+
             var stopwatch = Stopwatch.StartNew();
-            var response = await client.GetAsync(url, cts.Token);
+            var response = await client.SendAsync(request, cts.Token);
             response.EnsureSuccessStatusCode();
             stopwatch.Stop();
 

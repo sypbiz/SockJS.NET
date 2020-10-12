@@ -8,16 +8,16 @@ using syp.biz.SockJS.NET.Common.Extensions;
 
 namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
 {
-    internal class WebSocketTransportFactory : ITransportFactory
+    internal class SystemWebSocketTransportFactory : ITransportFactory
     {
         #region Implementation of ITransportFactory
-        public string Name => "websocket";
+        public string Name => "websocket-system";
         public bool Enabled { get; set; } = CheckIfWebSocketIsSupported();
         public uint Priority { get; set; } = 100;
         public Task<ITransport> Build(ITransportConfiguration config)
         {
             config.Logger.Debug($"{nameof(this.Build)}: '{this.Name}' transport");
-            var transport = new WebSocketTransport(config);
+            var transport = new SystemWebSocketTransport(config);
             return Task.FromResult<ITransport>(transport);
         }
         #endregion Implementation of ITransportFactory
@@ -40,18 +40,19 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
         }
     }
 
-    internal class WebSocketTransport : ITransport
+    internal class SystemWebSocketTransport : ITransport
     {
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private readonly ITransportConfiguration _config;
         private readonly ILogger _log;
         private readonly ClientWebSocket _socket;
 
-        public WebSocketTransport(ITransportConfiguration config)
+        public SystemWebSocketTransport(ITransportConfiguration config)
         {
             this._config = config;
             this._log = config.Logger;
             this._socket = new ClientWebSocket();
+            this.Configure(this._socket.Options, config);
         }
 
         #region Implementation of IDisposable
@@ -67,7 +68,7 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
         public event EventHandler? Connected;
         public event EventHandler? Disconnected;
 
-        public string Name => "websocket";
+        public string Name => "websocket-system";
 
         public async Task Connect(CancellationToken token)
         {
@@ -86,6 +87,7 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
             this._log.Info(nameof(this.Disconnect));
             if (this._socket.State == WebSocketState.Closed) return;
             await this._socket.CloseAsync(WebSocketCloseStatus.Empty, "", this._cts.Token);
+            this.Disconnected?.Invoke(this, EventArgs.Empty);
         }
 
         public Task Send(string data) => this.Send(data, CancellationToken.None);
@@ -145,6 +147,19 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
         {
             var state = this._socket.State;
             if (state != WebSocketState.Open) throw new Exception($"Invalid socket state '{state}");
+        }
+
+        private void Configure(ClientWebSocketOptions options, ITransportConfiguration config)
+        {
+            config.DefaultRequestHeaders.AsEnumerable().ForEach(i => options.SetRequestHeader(i.name, i.value));
+            if (!(config.Proxy is null)) options.Proxy = config.Proxy;
+            if (!(config.Cookies is null)) options.Cookies = config.Cookies;
+            if (!(config.RemoteCertificateValidator is null)) options.RemoteCertificateValidationCallback = config.RemoteCertificateValidator;
+            if (!(config.ClientCertificates is null)) options.ClientCertificates = config.ClientCertificates;
+            if (config.KeepAliveInterval.HasValue) options.KeepAliveInterval = config.KeepAliveInterval.Value;
+            if (config.Credentials is null) return;
+            options.Credentials = config.Credentials;
+            options.UseDefaultCredentials = false;
         }
     }
 }

@@ -6,7 +6,7 @@ using syp.biz.SockJS.NET.Client.Event;
 
 namespace syp.biz.SockJS.NET.Test
 {
-    internal class OriginalClientTester
+    internal class OriginalClientTester // : ITestModule
     {
         public Task Execute()
         {
