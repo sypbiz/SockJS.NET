@@ -4,7 +4,7 @@
     {
         Initial,
         Connecting,
-        Connected,
+        Established,
         Disconnected,
         Error
     }

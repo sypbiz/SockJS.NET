@@ -7,6 +7,8 @@ namespace syp.biz.SockJS.NET.Client2.Interfaces
     public interface ITransport : IDisposable
     {
         event EventHandler<string> Message;
+        event EventHandler Connected;
+        event EventHandler Disconnected;
         
         string Name { get; }
 

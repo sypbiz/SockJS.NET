@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using syp.biz.SockJS.NET.Common.DTO;
 
 namespace syp.biz.SockJS.NET.Client2
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class SockJS : IClient
     {
         private readonly SemaphoreSlim _sync = new SemaphoreSlim(1, 1);
@@ -55,7 +57,7 @@ namespace syp.biz.SockJS.NET.Client2
                 if (this.State != ConnectionState.Initial) throw new Exception($"Cannot connect while state is '{this.State}'");
                 this.State = ConnectionState.Connecting;
 
-                var info = await new Implementations.InfoReceiver(this._config).GetInfo();
+                var info = await new InfoReceiver(this._config).GetInfo();
 
                 ITransport? selectedTransport = null;
                 var factories = this._config.TransportFactories.Where(t => t.Enabled).ToArray();
@@ -63,12 +65,16 @@ namespace syp.biz.SockJS.NET.Client2
 
                 foreach (var factory in factories)
                 {
-                    selectedTransport = await TryTransport(factory, info, token);
+                    selectedTransport = await this.TryTransport(factory, info, token);
                     if (selectedTransport is null) continue;
                     break;
                 }
 
                 this._transport = selectedTransport ?? throw new Exception("No available transports");
+                this._transport.Message += this.TransportOnMessage;
+                this._transport.Disconnected += this.TransportOnDisconnected;
+                this.State = ConnectionState.Established;
+                this.Connected?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception e)
             {
@@ -87,15 +93,19 @@ namespace syp.biz.SockJS.NET.Client2
 
         public async Task Disconnect()
         {
-            throw new NotImplementedException();
+            this._log.Info(nameof(this.Disconnect));
+            this.VerifyEstablished();
+            await this._transport!.Disconnect();
         }
 
         public Task Send(string data) => this.Send(data, CancellationToken.None);
 
         public async Task Send(string data, CancellationToken token)
         {
-            throw new NotImplementedException();
+            this.VerifyEstablished();
+            await this._transport!.Send(data, token);
         }
+
         #endregion Implementation of IClient
 
         private async Task<ITransport?> TryTransport(
@@ -105,19 +115,36 @@ namespace syp.biz.SockJS.NET.Client2
         {
             try
             {
-                this._log.Debug($"{nameof(TryTransport)}: {factory.Name}");
+                this._log.Debug($"{nameof(this.TryTransport)}: {factory.Name}");
                 var transport = await factory.Build(new TransportConfiguration(this._config, info));
                 await transport.Connect(token);
-                this._log.Info($"{nameof(TryTransport)}: {factory.Name} - Success");
-                this.Connected?.Invoke(this, EventArgs.Empty);
+                this._log.Info($"{nameof(this.TryTransport)}: {factory.Name} - Success");
                 return transport;
             }
             catch (Exception e)
             {
-                this._log.Error($"{nameof(TryTransport)}: {factory.Name} - Failed: {e.Message}");
-                this._log.Error($"{nameof(TryTransport)}: {e}");
+                this._log.Error($"{nameof(this.TryTransport)}: {factory.Name} - Failed: {e.Message}");
+                this._log.Error($"{nameof(this.TryTransport)}: {e}");
                 return null;
             }
+        }
+
+        private void TransportOnMessage(object sender, string message)
+        {
+            this._log.Debug($"{nameof(this.TransportOnMessage)}: {message}");
+            this.Message?.Invoke(this, message);
+        }
+
+        private void TransportOnDisconnected(object sender, EventArgs e)
+        {
+            this._log.Debug($"{nameof(this.TransportOnDisconnected)}");
+            this.Disconnected?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void VerifyEstablished()
+        {
+            if (this._transport is null || this.State != ConnectionState.Established)
+                throw new InvalidOperationException("Connection not established");
         }
     }
 }
