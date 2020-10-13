@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using syp.biz.SockJS.NET.Client2;
 
 namespace syp.biz.SockJS.NET.Test
 {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     internal class Client2Tester : ITestModule
     {
         public async Task Execute()
@@ -42,7 +44,7 @@ namespace syp.biz.SockJS.NET.Test
                     {
                         Console.WriteLine($"****************** Main: Message: {msg}");
                         if (msg != "test") return;
-                        Console.WriteLine($"****************** Main: Got back echo -> sending shutdown");
+                        Console.WriteLine("****************** Main: Got back echo -> sending shutdown");
                         //                                sockJs.Send("shutdown");
                         //                            }
                         //                            else if (dataString == "ok")
@@ -59,7 +61,7 @@ namespace syp.biz.SockJS.NET.Test
                 {
                     try
                     {
-                        Console.WriteLine($"****************** Main: Closed");
+                        Console.WriteLine("****************** Main: Closed");
                         tcs.TrySetResult(true);
                     }
                     catch (Exception ex)

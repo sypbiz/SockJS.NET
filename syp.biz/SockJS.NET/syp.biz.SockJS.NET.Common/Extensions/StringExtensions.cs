@@ -2,6 +2,8 @@
 
 namespace syp.biz.SockJS.NET.Common.Extensions
 {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class StringExtensions
     {
         /// <summary>

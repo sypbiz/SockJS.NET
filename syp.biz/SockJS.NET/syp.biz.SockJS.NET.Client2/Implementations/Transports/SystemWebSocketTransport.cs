@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -8,6 +9,7 @@ using syp.biz.SockJS.NET.Common.Extensions;
 
 namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
 {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     internal class SystemWebSocketTransportFactory : ITransportFactory
     {
         #region Implementation of ITransportFactory
@@ -32,10 +34,6 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
             catch (PlatformNotSupportedException)
             {
                 return false;
-            }
-            catch
-            {
-                throw;
             }
         }
     }
@@ -116,25 +114,29 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
             try
             {
                 this._log.Debug(nameof(this.ReceiveLoop));
+                
+                var builder = new StringBuilder();
+                var buffer = new ArraySegment<byte>(new byte[1024]);
+
                 while (!this._cts.IsCancellationRequested && this._socket.State == WebSocketState.Open)
                 {
-                    var builder = new StringBuilder();
-                    var buffer = new byte[1024];
-                    var segment = new ArraySegment<byte>(buffer);
-                    var result = await this._socket.ReceiveAsync(segment, this._cts.Token);
-                    if (result.MessageType == WebSocketMessageType.Close)
+                    WebSocketReceiveResult result;
+                    do
                     {
-                        this._log.Error("Server sent close message");
-                        await this.Disconnect();
-                        break;
-                    }
-                    var data = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    builder.Append(data);
-                    if (!result.EndOfMessage) continue;
-                    var message = builder.ToString();
-                    builder = new StringBuilder();
+                        result = await this._socket.ReceiveAsync(buffer, this._cts.Token);
+                        var data = Encoding.UTF8.GetString(buffer.AsSpan(buffer.Offset, result.Count));
+                        builder.Append(data);
+                    } while (!result.EndOfMessage);
 
-                    _ = Task.Run(() => this.Message?.Invoke(this, message)).ConfigureAwait(false);
+                    var message = builder.ToString();
+                    builder.Clear();
+
+                    if (!message.IsNullOrWhiteSpace()) Task.Run(() => this.Message?.Invoke(this, message)).IgnoreAwait();
+                    if (result.MessageType != WebSocketMessageType.Close) continue;
+
+                    this._log.Error("Server sent close message");
+                    await this.Disconnect();
+                    return;
                 }
             }
             catch (Exception ex)

@@ -15,13 +15,11 @@ namespace syp.biz.SockJS.NET.Client2.Implementations
     {
         private readonly SockJsConfiguration.Factory.ReadOnlySockJsConfiguration _config;
         private readonly ILogger _log;
-        private readonly Uri _baseUrl;
 
         public InfoReceiver(SockJsConfiguration.Factory.ReadOnlySockJsConfiguration config)
         {
             this._config = config;
             this._log = config.Logger;
-            this._baseUrl = config.BaseEndpoint;
         }
 
         public async Task<InfoDto> GetInfo()
