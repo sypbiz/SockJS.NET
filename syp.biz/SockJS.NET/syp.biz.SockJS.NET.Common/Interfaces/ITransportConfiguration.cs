@@ -4,7 +4,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using syp.biz.SockJS.NET.Common.DTO;
 
-namespace syp.biz.SockJS.NET.Client.Interfaces
+namespace syp.biz.SockJS.NET.Common.Interfaces
 {
     public interface ITransportConfiguration
     {

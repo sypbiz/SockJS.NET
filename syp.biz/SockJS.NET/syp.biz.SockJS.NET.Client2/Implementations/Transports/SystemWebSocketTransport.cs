@@ -4,8 +4,8 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.Extensions;
+using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client.Implementations.Transports
 {

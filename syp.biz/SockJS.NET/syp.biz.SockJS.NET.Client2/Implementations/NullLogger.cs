@@ -1,4 +1,4 @@
-﻿using syp.biz.SockJS.NET.Client.Interfaces;
+﻿using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client.Implementations
 {

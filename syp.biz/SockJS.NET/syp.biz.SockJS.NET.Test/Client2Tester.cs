@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using syp.biz.SockJS.NET.Client;
-using syp.biz.SockJS.NET.Client.Interfaces;
+using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Test
 {

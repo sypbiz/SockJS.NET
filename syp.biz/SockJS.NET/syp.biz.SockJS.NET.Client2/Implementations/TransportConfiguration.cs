@@ -2,8 +2,8 @@
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
+using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client.Implementations
 {

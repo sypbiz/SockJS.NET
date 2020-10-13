@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
-namespace syp.biz.SockJS.NET.Client.Interfaces
+namespace syp.biz.SockJS.NET.Common.Interfaces
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public interface ITransportFactory

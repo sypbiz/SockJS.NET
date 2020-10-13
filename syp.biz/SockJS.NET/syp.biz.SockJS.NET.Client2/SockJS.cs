@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using syp.biz.SockJS.NET.Client.Implementations;
-using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
+using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client
 {
