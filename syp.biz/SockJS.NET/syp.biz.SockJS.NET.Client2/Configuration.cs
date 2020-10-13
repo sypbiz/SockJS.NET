@@ -10,7 +10,7 @@ using syp.biz.SockJS.NET.Common.Interfaces;
 namespace syp.biz.SockJS.NET.Client
 {
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class SockJsConfiguration
+    public class Configuration
     {
         public ICollection<ITransportFactory>? TransportFactories { get; set; }
         public Uri? BaseEndpoint { get; set; }
@@ -28,9 +28,9 @@ namespace syp.biz.SockJS.NET.Client
 
         public static class Factory
         {
-            public static SockJsConfiguration BuildDefault()
+            public static Configuration BuildDefault()
             {
-                return new SockJsConfiguration
+                return new Configuration
                 {
                     TransportFactories = ReflectTransportFactories(),
                     BaseEndpoint = null,
@@ -62,10 +62,10 @@ namespace syp.biz.SockJS.NET.Client
 
             internal class ReadOnlySockJsConfiguration
             {
-                public ReadOnlySockJsConfiguration(SockJsConfiguration config)
+                public ReadOnlySockJsConfiguration(Configuration config)
                 {
                     this.TransportFactories = config.TransportFactories ?? ReflectTransportFactories();
-                    this.BaseEndpoint = config.BaseEndpoint ?? throw new ArgumentNullException(nameof(SockJsConfiguration.BaseEndpoint));
+                    this.BaseEndpoint = config.BaseEndpoint ?? throw new ArgumentNullException(nameof(Configuration.BaseEndpoint));
                     this.DefaultHeaders = config.DefaultHeaders ?? new WebHeaderCollection();
                     this.Logger = config.Logger ?? new Implementations.NullLogger();
                     this.InfoReceiverTimeout = config.InfoReceiverTimeout ?? TimeSpan.FromSeconds(8);

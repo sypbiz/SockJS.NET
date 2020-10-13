@@ -16,7 +16,7 @@ namespace syp.biz.SockJS.NET.Test
             var tcs = new TaskCompletionSource<bool>();
             try
             {
-                var config = SockJsConfiguration.Factory.BuildDefault();
+                var config = Configuration.Factory.BuildDefault();
                 config.Logger = new ConsoleLogger();
                 config.BaseEndpoint = new Uri("http://localhost:9999/echo");
                 config.DefaultHeaders = new WebHeaderCollection

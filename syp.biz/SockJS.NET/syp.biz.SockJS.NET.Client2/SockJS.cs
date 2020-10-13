@@ -13,14 +13,14 @@ namespace syp.biz.SockJS.NET.Client
     public class SockJS : IClient
     {
         private readonly SemaphoreSlim _sync = new SemaphoreSlim(1, 1);
-        private readonly SockJsConfiguration.Factory.ReadOnlySockJsConfiguration _config;
+        private readonly Configuration.Factory.ReadOnlySockJsConfiguration _config;
         private readonly ILogger _log;
         private ITransport? _transport;
         private ConnectionState _state = ConnectionState.Initial;
 
-        public SockJS(SockJsConfiguration? config = default)
+        public SockJS(Configuration? config = default)
         {
-            this._config = (config ?? SockJsConfiguration.Factory.BuildDefault()).AsReadonly();
+            this._config = (config ?? Configuration.Factory.BuildDefault()).AsReadonly();
             this._log = this._config.Logger;
         }
 

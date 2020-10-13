@@ -13,10 +13,10 @@ namespace syp.biz.SockJS.NET.Client.Implementations
 {
     internal class InfoReceiver
     {
-        private readonly SockJsConfiguration.Factory.ReadOnlySockJsConfiguration _config;
+        private readonly Configuration.Factory.ReadOnlySockJsConfiguration _config;
         private readonly ILogger _log;
 
-        public InfoReceiver(SockJsConfiguration.Factory.ReadOnlySockJsConfiguration config)
+        public InfoReceiver(Configuration.Factory.ReadOnlySockJsConfiguration config)
         {
             this._config = config;
             this._log = config.Logger;

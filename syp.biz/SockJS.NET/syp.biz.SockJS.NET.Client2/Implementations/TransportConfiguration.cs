@@ -9,9 +9,9 @@ namespace syp.biz.SockJS.NET.Client.Implementations
 {
     internal class TransportConfiguration : ITransportConfiguration
     {
-        private readonly SockJsConfiguration.Factory.ReadOnlySockJsConfiguration _config;
+        private readonly Configuration.Factory.ReadOnlySockJsConfiguration _config;
 
-        public TransportConfiguration(SockJsConfiguration.Factory.ReadOnlySockJsConfiguration config, InfoDto info)
+        public TransportConfiguration(Configuration.Factory.ReadOnlySockJsConfiguration config, InfoDto info)
         {
             this.Info = info;
             this._config = config;
