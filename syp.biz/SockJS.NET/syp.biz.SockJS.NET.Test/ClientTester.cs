@@ -9,7 +9,7 @@ using syp.biz.SockJS.NET.Common.Interfaces;
 namespace syp.biz.SockJS.NET.Test
 {
     [SuppressMessage("ReSharper", "UnusedType.Global")]
-    internal class Client2Tester : ITestModule
+    internal class ClientTester : ITestModule
     {
         public async Task Execute()
         {
