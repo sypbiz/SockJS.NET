@@ -65,8 +65,6 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
         public event EventHandler<string>? Message;
         public event EventHandler? Disconnected;
 
-        public string Name => "websocket-system";
-
         public async Task Connect(CancellationToken token)
         {
             var endpoint = this.BuildEndpoint();

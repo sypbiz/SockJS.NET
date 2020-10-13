@@ -3,7 +3,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using syp.biz.SockJS.NET.Common.Interfaces;
 
 namespace syp.biz.SockJS.NET.Test
 {
@@ -41,7 +40,7 @@ namespace syp.biz.SockJS.NET.Test
         Task Execute();
     }
 
-    internal class ConsoleLogger : ILogger, syp.biz.SockJS.NET.Client2.Interfaces.ILogger
+    internal class ConsoleLogger : Client2.Interfaces.ILogger
     {
         [DebuggerStepThrough, DebuggerNonUserCode]
         public void Debug(string message) => Console.WriteLine($"{DateTime.Now:s} [DBG] {message}");

@@ -5,8 +5,6 @@ namespace syp.biz.SockJS.NET.Common.DTO
 {
     public class InfoDto
     {
-        public string BaseUrl { get; set; }
-
         [JsonProperty(PropertyName = "entropy")]
         public long Entropy { get; set; }
 
