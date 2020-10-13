@@ -1,4 +1,4 @@
-﻿namespace syp.biz.SockJS.NET.Client2.Interfaces
+﻿namespace syp.biz.SockJS.NET.Client.Interfaces
 {
     public interface ILogger
     {

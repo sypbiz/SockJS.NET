@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "syp.biz.SockJS.NET.Common",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "syp.biz.SockJS.NET.Test", "syp.biz\SockJS.NET\syp.biz.SockJS.NET.Test\syp.biz.SockJS.NET.Test.csproj", "{23265FD6-C038-4C36-9AD9-B7E5C26F876A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "syp.biz.SockJS.NET.Client2", "syp.biz\SockJS.NET\syp.biz.SockJS.NET.Client2\syp.biz.SockJS.NET.Client2.csproj", "{6C251580-20BE-4523-8062-C7C222B7FA42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "syp.biz.SockJS.NET.Client", "syp.biz\SockJS.NET\syp.biz.SockJS.NET.Client2\syp.biz.SockJS.NET.Client.csproj", "{6C251580-20BE-4523-8062-C7C222B7FA42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

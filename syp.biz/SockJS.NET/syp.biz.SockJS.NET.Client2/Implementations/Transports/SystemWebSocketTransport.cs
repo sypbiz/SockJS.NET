@@ -4,10 +4,10 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.Extensions;
 
-namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
+namespace syp.biz.SockJS.NET.Client.Implementations.Transports
 {
     [SuppressMessage("ReSharper", "UnusedType.Global")]
     internal class SystemWebSocketTransportFactory : ITransportFactory

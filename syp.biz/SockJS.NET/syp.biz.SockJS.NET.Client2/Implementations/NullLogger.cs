@@ -1,6 +1,6 @@
-﻿using syp.biz.SockJS.NET.Client2.Interfaces;
+﻿using syp.biz.SockJS.NET.Client.Interfaces;
 
-namespace syp.biz.SockJS.NET.Client2.Implementations
+namespace syp.biz.SockJS.NET.Client.Implementations
 {
     internal class NullLogger : ILogger
     {

@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace syp.biz.SockJS.NET.Client2.Interfaces
+namespace syp.biz.SockJS.NET.Client.Interfaces
 {
     public interface IClient : IDisposable
     {

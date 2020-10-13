@@ -3,8 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using syp.biz.SockJS.NET.Client2;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client;
+using syp.biz.SockJS.NET.Client.Interfaces;
 
 namespace syp.biz.SockJS.NET.Test
 {
@@ -24,7 +24,7 @@ namespace syp.biz.SockJS.NET.Test
                     {HttpRequestHeader.UserAgent, "Test"},
                     {"application-key", "foo-bar"}
                 };
-                var sockJs = (IClient)new Client2.SockJS(config);
+                var sockJs = (IClient)new Client.SockJS(config);
 
                 sockJs.Connected += async (sender, e) =>
                 {

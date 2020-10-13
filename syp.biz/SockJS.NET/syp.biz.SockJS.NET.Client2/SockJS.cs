@@ -3,11 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using syp.biz.SockJS.NET.Client2.Implementations;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client.Implementations;
+using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
 
-namespace syp.biz.SockJS.NET.Client2
+namespace syp.biz.SockJS.NET.Client
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class SockJS : IClient

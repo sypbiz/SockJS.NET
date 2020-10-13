@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client.Interfaces;
 
-namespace syp.biz.SockJS.NET.Client2
+namespace syp.biz.SockJS.NET.Client
 {
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SockJsConfiguration

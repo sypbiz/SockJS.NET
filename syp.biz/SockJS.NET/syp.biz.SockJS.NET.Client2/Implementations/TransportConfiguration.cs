@@ -2,10 +2,10 @@
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
 
-namespace syp.biz.SockJS.NET.Client2.Implementations
+namespace syp.biz.SockJS.NET.Client.Implementations
 {
     internal class TransportConfiguration : ITransportConfiguration
     {

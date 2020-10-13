@@ -5,11 +5,11 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using syp.biz.SockJS.NET.Client2.Interfaces;
+using syp.biz.SockJS.NET.Client.Interfaces;
 using syp.biz.SockJS.NET.Common.DTO;
 using syp.biz.SockJS.NET.Common.Extensions;
 
-namespace syp.biz.SockJS.NET.Client2.Implementations
+namespace syp.biz.SockJS.NET.Client.Implementations
 {
     internal class InfoReceiver
     {
