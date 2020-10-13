@@ -21,8 +21,8 @@ namespace syp.biz.SockJS.NET.Test
                 foreach (var type in testModules)
                 {
                     Console.WriteLine($"Testing '{type.Name}'...");
-                    var module = (ITestModule) Activator.CreateInstance(type);
-                    await module!.Execute();
+                    var module = (ITestModule) Activator.CreateInstance(type)!;
+                    await module.Execute();
                 }
             }
             catch (Exception ex)

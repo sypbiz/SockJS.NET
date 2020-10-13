@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>NU1605;CS8625;CS8600;CS8602</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
