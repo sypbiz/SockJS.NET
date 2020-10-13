@@ -2,9 +2,9 @@
 {
     public enum ReadyState
     {
-        CONNECTING = 0,
-        OPEN = 1,
-        CLOSING = 2,
-        CLOSED = 3
+        Connecting = 0,
+        Open = 1,
+        Closing = 2,
+        Closed = 3
     }
 }
