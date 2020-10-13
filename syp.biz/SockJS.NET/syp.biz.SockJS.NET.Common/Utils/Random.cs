@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace syp.biz.SockJS.NET.Common.Utils
 {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Random
     {
         private const string RandomStringChars = "abcdefghijklmnopqrstuvwxyz012345";
@@ -24,6 +27,7 @@ namespace syp.biz.SockJS.NET.Common.Utils
             return new StringBuilder(length).Append(chars).ToString();
         }
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static long GetNumber(long max) => (long) Math.Floor(new System.Random(DateTime.UtcNow.Millisecond).NextDouble() * max);
 
         public static string GetNumberString(long max)

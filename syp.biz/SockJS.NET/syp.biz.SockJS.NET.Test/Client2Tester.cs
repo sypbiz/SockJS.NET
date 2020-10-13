@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using syp.biz.SockJS.NET.Client2;
+using syp.biz.SockJS.NET.Client2.Interfaces;
 
 namespace syp.biz.SockJS.NET.Test
 {
@@ -23,7 +24,7 @@ namespace syp.biz.SockJS.NET.Test
                     {HttpRequestHeader.UserAgent, "Test"},
                     {"application-key", "foo-bar"}
                 };
-                var sockJs = new Client2.SockJS(config);
+                var sockJs = (IClient)new Client2.SockJS(config);
 
                 sockJs.Connected += async (sender, e) =>
                 {

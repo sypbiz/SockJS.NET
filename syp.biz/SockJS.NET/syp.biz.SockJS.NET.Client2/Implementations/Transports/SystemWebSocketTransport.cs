@@ -63,7 +63,6 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
 
         #region Implementation of ITransport
         public event EventHandler<string>? Message;
-        public event EventHandler? Connected;
         public event EventHandler? Disconnected;
 
         public string Name => "websocket-system";
@@ -74,7 +73,6 @@ namespace syp.biz.SockJS.NET.Client2.Implementations.Transports
             this._log.Info($"{nameof(this.Connect)}: {endpoint}");
 
             await this._socket.ConnectAsync(endpoint, token);
-            this.Connected?.Invoke(this, EventArgs.Empty);
             _ = Task.Factory.StartNew(this.ReceiveLoop, this._cts, TaskCreationOptions.LongRunning).ConfigureAwait(false);
         }
 

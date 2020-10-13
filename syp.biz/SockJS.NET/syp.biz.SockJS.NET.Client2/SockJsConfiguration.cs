@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Net.Security;
@@ -8,6 +9,7 @@ using syp.biz.SockJS.NET.Client2.Interfaces;
 
 namespace syp.biz.SockJS.NET.Client2
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SockJsConfiguration
     {
         public ICollection<ITransportFactory>? TransportFactories { get; set; }
@@ -37,9 +39,10 @@ namespace syp.biz.SockJS.NET.Client2
                     InfoReceiverTimeout = TimeSpan.FromSeconds(8),
                     Credentials = null,
                     Proxy = null,
+                    ClientCertificates = null,
                     RemoteCertificateValidator = null,
                     Cookies = null,
-                    KeepAliveInterval = null
+                    KeepAliveInterval = null,
                 };
             }
 
