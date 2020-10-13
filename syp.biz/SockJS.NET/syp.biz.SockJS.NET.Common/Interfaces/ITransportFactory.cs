@@ -1,13 +1,15 @@
-﻿using syp.biz.SockJS.NET.Common.DTO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 namespace syp.biz.SockJS.NET.Common.Interfaces
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public interface ITransportFactory
     {
-        ITransportFactory FacadeTransport { get; }
-        long RoundTrips { get; }
-        string TransportName { get; }
-        bool Enabled(InfoDto info);
-        ITransport Build(string transportName, string transportUrl, string originalTransportUrl, ITransportOptions options);
+        string Name { get; }
+        bool Enabled { get; set; }
+        uint Priority { get; set; }
+
+        Task<ITransport> Build(ITransportConfiguration config);
     }
 }
