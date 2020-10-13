@@ -16,14 +16,14 @@ namespace syp.biz.SockJS.NET.Test
             var tcs = new TaskCompletionSource<bool>();
             try
             {
-                var config = Configuration.Factory.BuildDefault();
+                var config = Configuration.Factory.BuildDefault("http://localhost:9999/echo");
                 config.Logger = new ConsoleLogger();
-                config.BaseEndpoint = new Uri("http://localhost:9999/echo");
                 config.DefaultHeaders = new WebHeaderCollection
                 {
-                    {HttpRequestHeader.UserAgent, "Test"},
+                    {HttpRequestHeader.UserAgent, "Custom User Agent"},
                     {"application-key", "foo-bar"}
                 };
+
                 var sockJs = (IClient)new Client.SockJS(config);
 
                 sockJs.Connected += async (sender, e) =>
@@ -46,11 +46,6 @@ namespace syp.biz.SockJS.NET.Test
                         Console.WriteLine($"****************** Main: Message: {msg}");
                         if (msg != "test") return;
                         Console.WriteLine("****************** Main: Got back echo -> sending shutdown");
-                        //                                sockJs.Send("shutdown");
-                        //                            }
-                        //                            else if (dataString == "ok")
-                        //                            {
-                        //                                Console.WriteLine($"****************** Main: Got back shutdown confirmation");
                         await sockJs.Disconnect();
                     }
                     catch (Exception ex)

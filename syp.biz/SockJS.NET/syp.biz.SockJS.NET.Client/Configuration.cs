@@ -28,12 +28,19 @@ namespace syp.biz.SockJS.NET.Client
 
         public static class Factory
         {
-            public static Configuration BuildDefault()
+            public static Configuration BuildDefault(string baseEndpoint)
             {
+                return BuildDefault(new Uri(baseEndpoint ?? throw new ArgumentNullException(nameof(baseEndpoint))));
+            }
+
+            public static Configuration BuildDefault(Uri baseEndpoint)
+            {
+                if (baseEndpoint is null) throw new ArgumentNullException(nameof(baseEndpoint));
+
                 return new Configuration
                 {
+                    BaseEndpoint = baseEndpoint,
                     TransportFactories = ReflectTransportFactories(),
-                    BaseEndpoint = null,
                     DefaultHeaders = new WebHeaderCollection(),
                     Logger = new Implementations.NullLogger(),
                     InfoReceiverTimeout = TimeSpan.FromSeconds(8),

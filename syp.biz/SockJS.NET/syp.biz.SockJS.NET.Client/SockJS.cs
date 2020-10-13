@@ -18,9 +18,15 @@ namespace syp.biz.SockJS.NET.Client
         private ITransport? _transport;
         private ConnectionState _state = ConnectionState.Initial;
 
-        public SockJS(Configuration? config = default)
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        public SockJS(string baseEndpoint) : this(Configuration.Factory.BuildDefault(baseEndpoint)) {}
+        
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        public SockJS(Uri baseEndpoint) : this(Configuration.Factory.BuildDefault(baseEndpoint)) {}
+
+        public SockJS(Configuration config)
         {
-            this._config = (config ?? Configuration.Factory.BuildDefault()).AsReadonly();
+            this._config = config?.AsReadonly() ?? throw new ArgumentNullException(nameof(config));
             this._log = this._config.Logger;
         }
 
