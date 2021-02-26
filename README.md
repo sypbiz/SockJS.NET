@@ -102,3 +102,16 @@ This library is based on the [`SockJS-client`](https://github.com/sockjs/sockjs-
 Dependencies
 ------------
 - [`Newtonsoft.Json`](https://www.nuget.org/packages/Newtonsoft.Json) ([license](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md))
+
+WIP
+---
+### STOMP Detinations
+
+Subscribing STOMP destinations can be achieved like this:
+````csharp
+await sockJs.Send("CONNECT\naccept-version:1.0,1.1,2.0\n\n\x00\n");
+await sockJs.Send("SUBSCRIBE\nid:sub-0\ndestination:/user/queue/topicname\n\n\0");
+await sockJs.Send("SEND\ndestination:/app/topicname\ncontent-length:\n\n"payload to be sent" \n\n\0");
+````
+
+TODO: Add APIs to suscribe from the `SockJS` object.
