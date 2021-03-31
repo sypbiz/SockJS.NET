@@ -13,33 +13,30 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>syp.biz.SockJS.NET.Client</PackageId>
-    <Description>An asynchronous .NET implementation of the SockJS client</Description>
-    <Product>SockJS.NET.Client</Product>
+    <PackageId>syp.biz.Stomp.Net.Client</PackageId>
+    <Description>An asynchronous .NET implementation of the SockJS client with STOMP headers and destination subscribe</Description>
+    <Product>SockJS.NET.StompClient</Product>
     <Version>2.1.227</Version>
-    <Authors>syp.biz</Authors>
-    <Company>syp.biz</Company>
-    <PackageProjectUrl>https://github.com/sypbiz/SockJS.NET</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/sypbiz/SockJS.NET</RepositoryUrl>
+    <Authors>kall2Sollies</Authors>
+    <Company>Synexie</Company>
+    <PackageProjectUrl>https://github.com/kall2sollies/SockJS.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kall2sollies/SockJS.NET</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright (c) 2020 syp.biz</Copyright>
-    <PackageTags>SockJS; Client; .NET</PackageTags>
+    <Copyright>Copyright (c) 2021 Synexie</Copyright>
+    <PackageTags>SockJS; Client; .NET; STOMP</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\syp.biz.SockJS.NET.Common\syp.biz.SockJS.NET.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\..\LICENSE">
-      <Pack>True</Pack>
+    <None Include="..\..\..\LICENSE" Link="LICENSE">
       <PackagePath></PackagePath>
+      <Pack>True</Pack>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\syp.biz.SockJS.NET.Client\syp.biz.SockJS.NET.Client.csproj" />
+    <ProjectReference Include="..\syp.biz.SockJS.NET.Common\syp.biz.SockJS.NET.Common.csproj" />
   </ItemGroup>
 
 </Project>
