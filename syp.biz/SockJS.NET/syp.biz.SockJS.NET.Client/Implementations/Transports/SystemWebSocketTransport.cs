@@ -138,6 +138,7 @@ namespace syp.biz.SockJS.NET.Client.Implementations.Transports
             catch (Exception ex)
             {
                 this._log.Error($"{nameof(this.ReceiveLoop)}: {ex}");
+                await this.Disconnect();
             }
         }
 
